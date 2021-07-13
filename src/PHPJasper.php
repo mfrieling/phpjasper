@@ -243,8 +243,10 @@ class PHPJasper
         $output = [];
         $returnVar = 0;
 
+        $cwd = getcwd();
         chdir($this->pathExecutable);
         exec($this->command, $output, $returnVar);
+        chdir($cwd);
 
         if ($returnVar !== 0) {
             throw new Exception\ErrorCommandExecutable();

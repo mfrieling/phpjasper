@@ -128,9 +128,13 @@ final class PHPJasperTest extends TestCase
     /** @test */
     public function execute(): void
     {
+        $cwdBeforeExecute = getcwd();
+
         $actual = $this->instance->compile(__DIR__ . '/test.jrxml')->execute();
+        $cwdAfterExecute = getcwd();
 
         $this->assertIsArray($actual);
+        $this->assertEquals($cwdBeforeExecute, $cwdAfterExecute, 'Current working dir must be changed back after execution.');
     }
 
     /** @test */
